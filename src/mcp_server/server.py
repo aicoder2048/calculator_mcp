@@ -2,6 +2,12 @@ from fastmcp import FastMCP, Context
 from contextlib import asynccontextmanager
 from typing import Dict, Any, AsyncIterator, List
 import logging
+import sys
+import os
+
+# Add parent directory to path for imports when run directly
+if __name__ == "__main__":
+    sys.path.insert(0, os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 
 # Import tool implementations
 from mcp_server.tools import add_tool
@@ -58,59 +64,70 @@ mcp = FastMCP(
 
 # Register tools with decorators
 @mcp.tool()
-async def add(input_data: AddInput) -> float:
+async def add(a: float, b: float) -> float:
     """Add two numbers together."""
-    return await add_tool.add(input_data)
+    add_input = AddInput(a=a, b=b)
+    return await add_tool.add(add_input)
 
 @mcp.tool()
-async def subtract(input_data: SubtractInput) -> float:
+async def subtract(a: float, b: float) -> float:
     """Subtract the second number from the first."""
-    return await subtract_tool.subtract(input_data)
+    subtract_input = SubtractInput(a=a, b=b)
+    return await subtract_tool.subtract(subtract_input)
 
 @mcp.tool()
-async def multiply(input_data: MultiplyInput) -> float:
+async def multiply(a: float, b: float) -> float:
     """Multiply two numbers."""
-    return await multiply_tool.multiply(input_data)
+    multiply_input = MultiplyInput(a=a, b=b)
+    return await multiply_tool.multiply(multiply_input)
 
 @mcp.tool()
-async def divide(input_data: DivideInput) -> dict:
+async def divide(a: float, b: float) -> dict:
     """Divide the first number by the second."""
-    return await divide_tool.divide(input_data)
+    divide_input = DivideInput(a=a, b=b)
+    return await divide_tool.divide(divide_input)
 
 @mcp.tool()
-async def power(input_data: PowerInput) -> float:
+async def power(base: float, exponent: float) -> float:
     """Calculate base raised to the power of exponent (乘方)."""
-    return await power_tool.power(input_data)
+    power_input = PowerInput(base=base, exponent=exponent)
+    return await power_tool.power(power_input)
 
 @mcp.tool()
-async def root(input_data: RootInput) -> float:
+async def root(number: float, n: int = 2) -> float:
     """Calculate the nth root of a number (开方)."""
-    return await root_tool.root(input_data)
+    root_input = RootInput(number=number, n=n)
+    return await root_tool.root(root_input)
 
 @mcp.tool()
-async def mod(input_data: ModInput) -> int:
+async def mod(a: int, b: int) -> int:
     """Calculate remainder (余数) when a is divided by b."""
-    return await mod_tool.mod(input_data)
+    mod_input = ModInput(a=a, b=b)
+    return await mod_tool.mod(mod_input)
 
 @mcp.tool()
-async def factorial(input_data: FactorialInput, ctx: Context) -> int:
+async def factorial(n: int, ctx: Context) -> int:
     """Calculate factorial of n with progress reporting."""
-    return await factorial_tool.factorial(input_data, ctx)
+    factorial_input = FactorialInput(n=n)
+    return await factorial_tool.factorial(factorial_input, ctx)
 
 @mcp.tool()
-async def mean(input_data: StatisticsInput) -> float:
+async def mean(numbers: List[float]) -> float:
     """Calculate the arithmetic mean of a dataset."""
-    return await statistics_tool.mean(input_data)
+    statistics_input = StatisticsInput(numbers=numbers)
+    return await statistics_tool.mean(statistics_input)
 
 @mcp.tool()
-async def median(input_data: StatisticsInput) -> float:
+async def median(numbers: List[float]) -> float:
     """Calculate the median of a dataset."""
-    return await statistics_tool.median(input_data)
+    statistics_input = StatisticsInput(numbers=numbers)
+    return await statistics_tool.median(statistics_input)
 
 @mcp.tool()
-async def stddev(input_data: StatisticsInput) -> float:
+async def stddev(numbers: List[float]) -> float:
     """Calculate the standard deviation of a dataset."""
-    return await statistics_tool.stddev(input_data)
+    statistics_input = StatisticsInput(numbers=numbers)
+    return await statistics_tool.stddev(statistics_input)
 
 # Register prompts with decorators
 @mcp.prompt()
@@ -134,5 +151,4 @@ def financial_calculation_prompt(principal: float, rate: float, time: int) -> st
     return financial_calculation_prompt.financial_calculation_prompt(principal, rate, time)
 
 if __name__ == "__main__":
-    import uvicorn
-    uvicorn.run(mcp, host="0.0.0.0", port=8000)
+    mcp.run()
