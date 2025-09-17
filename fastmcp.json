@@ -1,0 +1,14 @@
+{
+  "name": "calculator-mcp",
+  "version": "1.0.0",
+  "description": "Mathematical calculation MCP server",
+  "main": "src/mcp_server/server.py",
+  "dependencies": [
+    "fastmcp>=2.0.0",
+    "pydantic>=2.0.0"
+  ],
+  "environment": {
+    "LOG_LEVEL": "INFO",
+    "MAX_HISTORY_SIZE": "1000"
+  }
+}

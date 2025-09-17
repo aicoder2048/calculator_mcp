@@ -1,0 +1,12 @@
+{
+  "mcpServers": {
+    "calculator-mcp": {
+      "command": "/opt/homebrew/bin/uv",
+      "args": [
+        "run",
+        "python",
+        "/Users/szou/Python/Playground/CalculatorMCP/src/mcp_server/server.py"
+      ]
+    }
+  }
+}
