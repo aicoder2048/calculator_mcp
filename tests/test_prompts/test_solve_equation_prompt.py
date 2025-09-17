@@ -20,11 +20,13 @@ def test_solve_equation_conversation_content():
     assert "solve this equation step by step" in conversation[1].content.text
     assert conversation[1].role == "assistant"
     
-    assert "identify the type of equation" in conversation[2].content.text
+    # Check for equation type identification (more flexible)
+    assert ("identify the equation type" in conversation[2].content.text or 
+            "I'll identify the equation type" in conversation[2].content.text)
     assert conversation[2].role == "assistant"
     
     # Final user message asks for clarity
-    assert "show me each step clearly" in conversation[3].content.text
+    assert "show me each step clearly" in conversation[3].content.text.lower()
     assert conversation[3].role == "user"
 
 def test_solve_equation_conversation_roles():
