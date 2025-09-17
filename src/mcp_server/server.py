@@ -146,7 +146,7 @@ def solve_equation_conversation(equation: str) -> List:
     return solve_equation_prompt.solve_equation_conversation(equation)
 
 @mcp.prompt()
-def financial_calculation_prompt(principal: float, rate: float, time: int) -> str:
+def financial_calculation(principal: float, rate: float, time: int) -> str:
     """Generate a prompt for compound interest calculation."""
     return financial_calculation_prompt.financial_calculation_prompt(principal, rate, time)
 
