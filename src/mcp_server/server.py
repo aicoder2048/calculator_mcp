@@ -27,6 +27,7 @@ from mcp_server.prompts import solve_equation_prompt
 from mcp_server.prompts import financial_calculation_prompt
 from mcp_server.prompts import geometry_calculation_prompt
 from mcp_server.prompts import unit_conversion_prompt
+from mcp_server.prompts import loan_amortization_prompt
 
 # Import models
 from mcp_server.models.schemas import (
@@ -161,6 +162,11 @@ def geometry_calculation(shape: str, dimension1: float, dimension2: float = None
 def unit_conversion(conversion_type: str, value: float, from_unit: str = None, to_unit: str = None) -> str:
     """Generate a prompt for unit conversions (temperature, length, weight, speed, volume)."""
     return unit_conversion_prompt.unit_conversion_prompt(conversion_type, value, from_unit, to_unit)
+
+@mcp.prompt()
+def loan_amortization(principal: float, annual_rate: float, term_years: int, calculation_type: str = "monthly_payment") -> str:
+    """Generate a prompt for loan amortization calculations (payment, interest, prepayment, comparison)."""
+    return loan_amortization_prompt.loan_amortization_prompt(principal, annual_rate, term_years, calculation_type)
 
 if __name__ == "__main__":
     mcp.run()

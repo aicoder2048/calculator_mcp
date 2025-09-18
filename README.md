@@ -15,6 +15,7 @@
 - **金融计算**: 复利计算提示
 - **几何计算**: 圆形、三角形、矩形、球体的详细计算指导
 - **单位换算**: 温度、长度、重量、速度、体积的全方位换算指导
+- **贷款分期**: 月供、总利息、提前还款、还款方式对比分析
 - **资产清单**: 列出所有可用工具和提示
 
 ## 安装配置
@@ -193,6 +194,22 @@ uv run fastmcp install claude-code src/mcp_server/server.py --name calculator_mc
 - **速度 (speed/velocity)**: 速度单位换算（m/s、km/h、mph、knots等）
 - **体积 (volume)**: 容积单位换算（liters、gallons、ml、cups等）
 
+### `loan_amortization` - 贷款分期计算
+生成贷款分期还款的详细分析，包含月供计算、利息分析、提前还款和还款方式对比。
+
+**使用方法**: `/loan_amortization`
+**参数**:
+- `principal` (float): 贷款本金
+- `annual_rate` (float): 年利率（百分比）
+- `term_years` (int): 贷款期限（年）
+- `calculation_type` (str, 可选): 计算类型，默认为"monthly_payment"
+
+**支持的计算类型**:
+- **月供计算 (monthly_payment/payment)**: 计算固定月供金额、总成本、利息分解
+- **总利息分析 (total_interest/interest)**: 专注分析贷款生命周期的总利息成本
+- **提前还款 (early_payoff/prepayment)**: 分析额外本金还款的影响和节省
+- **还款方式对比 (comparison/equal_principal)**: 等额本息 vs 等额本金还款方式对比
+
 ### `list_all_assets` - 资产清单
 列出所有可用的工具和提示功能。
 
@@ -282,6 +299,25 @@ uv run fastmcp install claude-code src/mcp_server/server.py --name calculator_mc
 /unit_conversion conversion_type:"energy" value:100.0
 ```
 生成详细的单位换算指导，包含换算公式、验证步骤、参考点和MCP工具调用说明。
+
+#### 贷款分期计算
+```
+# 月供计算（25万贷款，4.5%年利率，30年）
+/loan_amortization principal:250000.0 annual_rate:4.5 term_years:30 calculation_type:"monthly_payment"
+
+# 总利息分析（30万贷款，5.0%年利率，20年）
+/loan_amortization principal:300000.0 annual_rate:5.0 term_years:20 calculation_type:"total_interest"
+
+# 提前还款分析（20万贷款，4.25%年利率，15年）
+/loan_amortization principal:200000.0 annual_rate:4.25 term_years:15 calculation_type:"early_payoff"
+
+# 还款方式对比（40万贷款，3.75%年利率，25年）
+/loan_amortization principal:400000.0 annual_rate:3.75 term_years:25 calculation_type:"comparison"
+
+# 默认月供计算（不指定calculation_type）
+/loan_amortization principal:180000.0 annual_rate:5.5 term_years:30
+```
+生成详细的贷款分析，包含分步的MCP工具计算、财务洞察、验证步骤和实用建议。
 
 #### 查看所有功能
 ```
