@@ -26,6 +26,7 @@ from mcp_server.prompts import list_assets_prompt
 from mcp_server.prompts import solve_equation_prompt
 from mcp_server.prompts import financial_calculation_prompt
 from mcp_server.prompts import geometry_calculation_prompt
+from mcp_server.prompts import unit_conversion_prompt
 
 # Import models
 from mcp_server.models.schemas import (
@@ -155,6 +156,11 @@ def financial_calculation(principal: float, rate: float, time: int) -> str:
 def geometry_calculation(shape: str, dimension1: float, dimension2: float = None, dimension3: float = None) -> str:
     """Generate a prompt for geometric calculations (circle, triangle, rectangle, sphere)."""
     return geometry_calculation_prompt.geometry_calculation_prompt(shape, dimension1, dimension2, dimension3)
+
+@mcp.prompt()
+def unit_conversion(conversion_type: str, value: float, from_unit: str = None, to_unit: str = None) -> str:
+    """Generate a prompt for unit conversions (temperature, length, weight, speed, volume)."""
+    return unit_conversion_prompt.unit_conversion_prompt(conversion_type, value, from_unit, to_unit)
 
 if __name__ == "__main__":
     mcp.run()

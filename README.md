@@ -14,6 +14,7 @@
 - **方程求解**: 分步骤解方程的对话式提示
 - **金融计算**: 复利计算提示
 - **几何计算**: 圆形、三角形、矩形、球体的详细计算指导
+- **单位换算**: 温度、长度、重量、速度、体积的全方位换算指导
 - **资产清单**: 列出所有可用工具和提示
 
 ## 安装配置
@@ -175,6 +176,23 @@ uv run fastmcp install claude-code src/mcp_server/server.py --name calculator_mc
 - **矩形 (rectangle)**: 需要长和宽，计算面积、周长、对角线
 - **球体 (sphere)**: 需要半径，计算表面积、体积、大圆周长
 
+### `unit_conversion` - 单位换算
+生成单位换算的详细步骤指导，包含换算公式、验证方法和实际应用场景。
+
+**使用方法**: `/unit_conversion`
+**参数**:
+- `conversion_type` (str): 换算类型（temperature、length、weight/mass、speed/velocity、volume）
+- `value` (float): 需要换算的数值
+- `from_unit` (str, 可选): 源单位
+- `to_unit` (str, 可选): 目标单位
+
+**支持的换算类型**:
+- **温度 (temperature)**: 摄氏度、华氏度、开尔文之间的换算
+- **长度 (length)**: 公制、英制长度单位换算（km、m、cm、mm、miles、feet、inches等）
+- **重量 (weight/mass)**: 质量单位换算（kg、g、pounds、ounces等）
+- **速度 (speed/velocity)**: 速度单位换算（m/s、km/h、mph、knots等）
+- **体积 (volume)**: 容积单位换算（liters、gallons、ml、cups等）
+
 ### `list_all_assets` - 资产清单
 列出所有可用的工具和提示功能。
 
@@ -242,6 +260,28 @@ uv run fastmcp install claude-code src/mcp_server/server.py --name calculator_mc
 /geometry_calculation shape:"sphere" dimension1:7.0
 ```
 生成带有详细目标和分步指导的几何计算提示，每个步骤都包含MCP工具调用说明。
+
+#### 单位换算
+```
+# 温度换算（25摄氏度转华氏度）
+/unit_conversion conversion_type:"temperature" value:25.0 from_unit:"celsius" to_unit:"fahrenheit"
+
+# 长度换算（100米转英尺）
+/unit_conversion conversion_type:"length" value:100.0 from_unit:"meters" to_unit:"feet"
+
+# 重量换算（5公斤转磅）
+/unit_conversion conversion_type:"weight" value:5.0 from_unit:"kilograms" to_unit:"pounds"
+
+# 速度换算（60英里/小时转公里/小时）
+/unit_conversion conversion_type:"speed" value:60.0 from_unit:"mph" to_unit:"km/h"
+
+# 体积换算（4升转美制加仑）
+/unit_conversion conversion_type:"volume" value:4.0 from_unit:"liters" to_unit:"gallons"
+
+# 获取通用换算指导（不指定具体单位）
+/unit_conversion conversion_type:"energy" value:100.0
+```
+生成详细的单位换算指导，包含换算公式、验证步骤、参考点和MCP工具调用说明。
 
 #### 查看所有功能
 ```
