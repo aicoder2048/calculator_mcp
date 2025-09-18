@@ -13,6 +13,7 @@
 - **乘法表生成**: 自定义大小和起始数字的乘法表
 - **方程求解**: 分步骤解方程的对话式提示
 - **金融计算**: 复利计算提示
+- **几何计算**: 圆形、三角形、矩形、球体的详细计算指导
 - **资产清单**: 列出所有可用工具和提示
 
 ## 安装配置
@@ -156,6 +157,24 @@ uv run fastmcp install claude-code src/mcp_server/server.py --name calculator_mc
 - `rate` (float): 利率
 - `time` (int): 时间（年）
 
+### `geometry_calculation` - 几何计算
+生成几何形状的详细计算步骤，包含目标、子目标和分步MCP工具调用指导。
+
+**使用方法**: `/geometry_calculation`
+**参数**:
+- `shape` (str): 形状类型（circle、triangle、rectangle、sphere）
+- `dimension1` (float): 第一个维度（如半径、长度、边a）
+- `dimension2` (float, 可选): 第二个维度（如宽度、高度、边b）
+- `dimension3` (float, 可选): 第三个维度（仅用于三角形的第三条边）
+
+**支持的形状**:
+- **圆形 (circle)**: 需要半径，计算面积、周长、对应球体属性
+- **三角形 (triangle)**: 
+  - 底和高模式：需要底边和高度
+  - 三边模式：需要三条边长，使用海伦公式
+- **矩形 (rectangle)**: 需要长和宽，计算面积、周长、对角线
+- **球体 (sphere)**: 需要半径，计算表面积、体积、大圆周长
+
 ### `list_all_assets` - 资产清单
 列出所有可用的工具和提示功能。
 
@@ -204,6 +223,25 @@ uv run fastmcp install claude-code src/mcp_server/server.py --name calculator_mc
 /financial_calculation_prompt principal:10000 rate:0.05 time:3
 ```
 生成本金10000元，年利率5%，3年期复利计算的提示。
+
+#### 几何计算
+```
+# 圆形计算（半径=5）
+/geometry_calculation shape:"circle" dimension1:5.0
+
+# 三角形计算（底=6，高=4）
+/geometry_calculation shape:"triangle" dimension1:6.0 dimension2:4.0
+
+# 三角形计算（三边：3, 4, 5 - 直角三角形）
+/geometry_calculation shape:"triangle" dimension1:3.0 dimension2:4.0 dimension3:5.0
+
+# 矩形计算（长=8，宽=6）
+/geometry_calculation shape:"rectangle" dimension1:8.0 dimension2:6.0
+
+# 球体计算（半径=7）
+/geometry_calculation shape:"sphere" dimension1:7.0
+```
+生成带有详细目标和分步指导的几何计算提示，每个步骤都包含MCP工具调用说明。
 
 #### 查看所有功能
 ```

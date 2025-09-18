@@ -25,6 +25,7 @@ from mcp_server.prompts import multiplication_table_prompt
 from mcp_server.prompts import list_assets_prompt
 from mcp_server.prompts import solve_equation_prompt
 from mcp_server.prompts import financial_calculation_prompt
+from mcp_server.prompts import geometry_calculation_prompt
 
 # Import models
 from mcp_server.models.schemas import (
@@ -149,6 +150,11 @@ def solve_equation_conversation(equation: str) -> List:
 def financial_calculation(principal: float, rate: float, time: int) -> str:
     """Generate a prompt for compound interest calculation."""
     return financial_calculation_prompt.financial_calculation_prompt(principal, rate, time)
+
+@mcp.prompt()
+def geometry_calculation(shape: str, dimension1: float, dimension2: float = None, dimension3: float = None) -> str:
+    """Generate a prompt for geometric calculations (circle, triangle, rectangle, sphere)."""
+    return geometry_calculation_prompt.geometry_calculation_prompt(shape, dimension1, dimension2, dimension3)
 
 if __name__ == "__main__":
     mcp.run()
