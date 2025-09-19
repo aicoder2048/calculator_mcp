@@ -18,6 +18,7 @@
 - **单位换算**: 温度、长度、重量、速度、体积的全方位换算指导
 - **贷款分期**: 月供、总利息、提前还款、还款方式对比分析
 - **概率计算**: 排列、组合、二项分布、期望值、贝叶斯定理计算
+- **健身分析**: 步数、卡路里、心率、体重、血压的健康数据统计分析
 - **资产清单**: 列出所有可用工具和提示
 
 ## 安装配置
@@ -447,6 +448,69 @@ uv run fastmcp install claude-code src/mcp_server/server.py --name calculator_mc
 ```
 生成详细的概率和组合数学指导，包含公式推导、MCP工具计算步骤、实际应用场景和验证方法。
 
+#### 健身数据分析
+```
+# 步数分析（每日分析，减重目标）
+/fitness_analytics metric_type:"steps" time_period:"daily" goal_type:"weight_loss"
+
+# 心率分析（每周分析，运动训练目标）
+/fitness_analytics metric_type:"heart_rate" time_period:"weekly" goal_type:"athletic_training"
+
+# 血压监控（每月分析，健康监控）
+/fitness_analytics metric_type:"blood_pressure" time_period:"monthly" goal_type:"health_monitoring"
+
+# 体重追踪（每周分析，减重目标）
+/fitness_analytics metric_type:"weight" time_period:"weekly" goal_type:"weight_loss"
+
+# 卡路里分析（每日分析，健身改善）
+/fitness_analytics metric_type:"calories" time_period:"daily" goal_type:"fitness_improvement"
+
+# 默认参数（步数，每周，健康监控）
+/fitness_analytics metric_type:"steps"
+
+# 季度健康综合分析
+/fitness_analytics metric_type:"heart_rate" time_period:"quarterly" goal_type:"health_monitoring"
+```
+生成详细的健身数据统计分析，包含：
+- 健康指标的统计描述（均值、方差、范围、分位数）
+- 时间趋势分析和模式识别  
+- 目标导向的健康建议和优化策略
+- MCP统计工具的分步计算指导
+- 健康风险评估和安全注意事项
+
+### `fitness_analytics` - 健身数据分析
+生成健身和健康数据的统计分析，包含多种健康指标的详细分析和趋势监控。
+
+**使用方法**: `/fitness_analytics`
+**参数**:
+- `metric_type` (str): 健康指标类型（steps、calories、heart_rate、weight、blood_pressure）
+- `time_period` (str, 默认="weekly"): 分析周期（daily、weekly、monthly、quarterly）
+- `goal_type` (str, 默认="health_monitoring"): 健身目标（weight_loss、fitness_improvement、health_monitoring、athletic_training）
+
+**支持的健康指标**:
+- **步数分析 (steps)**: 日常活动量评估，步数目标追踪，活动模式识别
+- **卡路里分析 (calories)**: 能量消耗分析，代谢评估，减重/增重指导
+- **心率分析 (heart_rate)**: 心血管健康监控，运动强度分析，静息心率趋势
+- **体重分析 (weight)**: 体重变化趋势，减重/增重进度，健康体重范围评估
+- **血压分析 (blood_pressure)**: 血压监控，心血管风险评估，健康警报
+
+**分析周期选项**:
+- **日常 (daily)**: 每日数据变化和短期波动分析
+- **每周 (weekly)**: 周度趋势和模式识别
+- **每月 (monthly)**: 月度进展追踪和长期趋势
+- **季度 (quarterly)**: 长期健康趋势和年度目标评估
+
+**健身目标类型**:
+- **减重 (weight_loss)**: 针对减重目标的数据分析和建议
+- **健身改善 (fitness_improvement)**: 提升体能和运动表现的指导
+- **健康监控 (health_monitoring)**: 日常健康状态跟踪和预防
+- **运动训练 (athletic_training)**: 专业运动表现优化和训练指导
+
+**统计工具集成**: 每个指标分析都使用10+种统计工具进行深度分析：
+- 基础统计: mean, variance, stddev, min_value, max_value, range_stat
+- 分布分析: percentile, quartiles, iqr, mode
+- 趋势分析: 时间序列模式，异常值检测，健康范围对比
+
 #### 查看所有功能
 ```
 /list_all_assets
@@ -457,25 +521,68 @@ uv run fastmcp install claude-code src/mcp_server/server.py --name calculator_mc
 
 ### 项目结构
 ```
-src/mcp_server/
-├── server.py              # 主服务器文件
-├── models/
-│   └── schemas.py         # 数据模型定义
-├── tools/                 # 计算工具实现
-│   ├── add_tool.py
-│   ├── subtract_tool.py
-│   ├── multiply_tool.py
-│   ├── divide_tool.py
-│   ├── power_tool.py
-│   ├── root_tool.py
-│   ├── mod_tool.py
-│   ├── factorial_tool.py
-│   └── statistics_tool.py
-└── prompts/              # 智能提示实现
-    ├── multiplication_table_prompt.py
-    ├── solve_equation_prompt.py
-    ├── financial_calculation_prompt.py
-    └── list_assets_prompt.py
+CalculatorMCP/
+├── README.md                     # 项目说明文档
+├── pyproject.toml               # Python 项目配置
+├── .mcp.json                    # MCP 服务器配置
+├── CLAUDE.md                    # 开发指南
+├── src/
+│   └── mcp_server/              # MCP 服务器主目录
+│       ├── __init__.py
+│       ├── server.py            # 主服务器文件 - FastMCP 服务器实例
+│       ├── models/              # 数据模型定义
+│       │   ├── __init__.py
+│       │   └── schemas.py       # Pydantic 数据验证模型
+│       ├── tools/               # 计算工具实现 (23个工具)
+│       │   ├── __init__.py
+│       │   ├── add_tool.py      # 加法运算
+│       │   ├── subtract_tool.py # 减法运算
+│       │   ├── multiply_tool.py # 乘法运算
+│       │   ├── divide_tool.py   # 除法运算
+│       │   ├── power_tool.py    # 乘方运算
+│       │   ├── root_tool.py     # 开方运算
+│       │   ├── mod_tool.py      # 取余运算
+│       │   ├── factorial_tool.py # 阶乘运算
+│       │   └── statistics_tool.py # 统计分析工具 (15种统计函数)
+│       └── prompts/             # 智能提示实现 (9个提示)
+│           ├── __init__.py
+│           ├── list_assets_prompt.py           # 资产清单提示
+│           ├── multiplication_table_prompt.py  # 乘法表生成
+│           ├── solve_equation_prompt.py        # 方程求解对话
+│           ├── financial_calculation_prompt.py # 金融计算指导
+│           ├── geometry_calculation_prompt.py  # 几何计算指导
+│           ├── unit_conversion_prompt.py       # 单位换算指导
+│           ├── loan_amortization_prompt.py     # 贷款分期分析
+│           ├── probability_calculation_prompt.py # 概率计算指导
+│           └── fitness_analytics_prompt.py     # 健身数据分析 (新增)
+├── tests/                       # 测试文件目录
+│   ├── __init__.py
+│   ├── test_tools/              # 工具测试 (95个测试)
+│   │   ├── __init__.py
+│   │   ├── test_add_tool.py
+│   │   ├── test_subtract_tool.py
+│   │   ├── test_multiply_tool.py
+│   │   ├── test_divide_tool.py
+│   │   ├── test_power_tool.py
+│   │   ├── test_root_tool.py
+│   │   ├── test_mod_tool.py
+│   │   ├── test_factorial_tool.py
+│   │   ├── test_statistics_tool.py         # 基础统计测试
+│   │   ├── test_statistics_extended.py     # 扩展统计测试
+│   │   └── test_statistics_server_tools.py # 服务器集成测试
+│   └── test_prompts/            # 提示测试 (101个测试)
+│       ├── __init__.py
+│       ├── test_list_assets_prompt.py
+│       ├── test_multiplication_table_prompt.py
+│       ├── test_solve_equation_prompt.py
+│       ├── test_financial_calculation_prompt.py
+│       ├── test_geometry_calculation_prompt.py
+│       ├── test_unit_conversion_prompt.py
+│       ├── test_loan_amortization_prompt.py
+│       ├── test_probability_calculation_prompt.py
+│       └── test_fitness_analytics_prompt.py # 健身分析测试 (新增)
+└── ai_docs/                     # AI 生成的文档
+    └── [documentation files]
 ```
 
 ### 依赖要求

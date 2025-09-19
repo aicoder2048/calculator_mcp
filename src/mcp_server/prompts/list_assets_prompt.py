@@ -179,6 +179,15 @@ Don't execute or run any of them.
      - `trials`: Number of trials (optional)
    - Use case: Statistical analysis, probability theory, combinatorics problems
 
+9. **fitness_analytics(metric_type: str, time_period: str = "weekly", goal_type: str = "health_monitoring") -> str**
+   - Generate a prompt for fitness and health analytics with comprehensive statistical analysis
+   - Parameters:
+     - `metric_type`: Health metric (steps, calories, heart_rate, weight, blood_pressure)
+     - `time_period`: Analysis period (daily, weekly, monthly, quarterly)
+     - `goal_type`: Fitness goal (weight_loss, fitness_improvement, health_monitoring, athletic_training)
+   - Statistical Tools Used: mean, variance, stddev, percentile, quartiles, iqr, mode, min_value, max_value, range_stat
+   - Use case: Health tracking, fitness optimization, progress monitoring, goal setting
+
 ## 💡 Usage Tips
 - All arithmetic operations support floating-point numbers
 - Division returns both quotient and remainder for completeness
@@ -190,4 +199,5 @@ Don't execute or run any of them.
 - Unit conversion prompts provide formula explanations and validation steps
 - Loan amortization supports multiple analysis types for comprehensive financial planning
 - Probability calculations cover combinatorics, distributions, and Bayesian inference
+- Fitness analytics leverages 15 statistical tools for comprehensive health insights
 - All enhanced prompts include purpose/goals explanation and sub-goals breakdown"""

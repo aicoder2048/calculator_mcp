@@ -29,6 +29,7 @@ from mcp_server.prompts import geometry_calculation_prompt
 from mcp_server.prompts import unit_conversion_prompt
 from mcp_server.prompts import loan_amortization_prompt
 from mcp_server.prompts import probability_calculation_prompt
+from mcp_server.prompts import fitness_analytics_prompt
 
 # Import models
 from mcp_server.models.schemas import (
@@ -298,6 +299,30 @@ def probability_calculation(calculation_type: str, n: int = None, r: int = None,
         trials: Number of trials (optional)
     """
     return probability_calculation_prompt.probability_calculation_prompt(calculation_type, n, r, probability, trials)
+
+@mcp.prompt()
+def fitness_analytics(metric_type: str, time_period: str = "weekly", goal_type: str = "health_monitoring") -> str:
+    """Generate a prompt for fitness and health analytics with detailed statistical analysis.
+    
+    Args:
+        metric_type: Health metric to analyze - options:
+            - "steps": Daily step count analysis
+            - "calories": Calorie burn analysis
+            - "heart_rate": Heart rate and cardiovascular analysis
+            - "weight": Weight tracking and progress analysis
+            - "blood_pressure": Blood pressure monitoring
+        time_period: Analysis period (default: "weekly") - options:
+            - "daily": Day-to-day analysis
+            - "weekly": Week-over-week trends
+            - "monthly": Monthly progress tracking
+            - "quarterly": Long-term trend analysis
+        goal_type: Fitness goal context (default: "health_monitoring") - options:
+            - "weight_loss": Weight reduction goals
+            - "fitness_improvement": Cardiovascular and strength goals
+            - "health_monitoring": General health tracking
+            - "athletic_training": Performance optimization
+    """
+    return fitness_analytics_prompt.fitness_analytics_prompt(metric_type, time_period, goal_type)
 
 if __name__ == "__main__":
     mcp.run()
