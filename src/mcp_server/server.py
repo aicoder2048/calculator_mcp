@@ -141,7 +141,7 @@ def build_multiplication_table(size: int = 10, start: int = 1) -> str:
 
 @mcp.prompt()
 def list_all_assets() -> str:
-    """Generate a prompt to list all available tools and prompts."""
+    """List all available assets including all the MCP server tools and prompts."""
     return list_assets_prompt.list_all_assets()
 
 @mcp.prompt()
