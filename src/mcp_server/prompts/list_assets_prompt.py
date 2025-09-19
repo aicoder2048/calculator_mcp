@@ -57,17 +57,17 @@ def list_all_assets() -> str:
 
 ## 📝 Prompts
 
-1. **build_multiplication_table(size: int = 10, start: int = 1) -> str**
+1. **list_all_assets() -> str**
+   - List all available assets including all the MCP server tools and prompts
+   - Returns this comprehensive documentation
+   - Use case: Discover server capabilities
+
+2. **build_multiplication_table(size: int = 10, start: int = 1) -> str**
    - Generate a prompt for creating multiplication tables
    - Parameters:
      - `size`: Table dimensions (default: 10)
      - `start`: Starting number (default: 1)
    - Use case: Create formatted multiplication reference tables
-
-2. **list_all_assets() -> str**
-   - Generate a prompt to list all available tools and prompts
-   - Returns this comprehensive documentation
-   - Use case: Discover server capabilities
 
 3. **solve_equation_conversation(equation: str) -> List**
    - Start a conversation to solve an equation step by step
