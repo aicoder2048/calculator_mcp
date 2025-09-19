@@ -28,6 +28,7 @@ from mcp_server.prompts import financial_calculation_prompt
 from mcp_server.prompts import geometry_calculation_prompt
 from mcp_server.prompts import unit_conversion_prompt
 from mcp_server.prompts import loan_amortization_prompt
+from mcp_server.prompts import probability_calculation_prompt
 
 # Import models
 from mcp_server.models.schemas import (
@@ -167,6 +168,11 @@ def unit_conversion(conversion_type: str, value: float, from_unit: str = None, t
 def loan_amortization(principal: float, annual_rate: float, term_years: int, calculation_type: str = "monthly_payment") -> str:
     """Generate a prompt for loan amortization calculations (payment, interest, prepayment, comparison)."""
     return loan_amortization_prompt.loan_amortization_prompt(principal, annual_rate, term_years, calculation_type)
+
+@mcp.prompt()
+def probability_calculation(calculation_type: str, n: int = None, r: int = None, probability: float = None, trials: int = None) -> str:
+    """Generate a prompt for probability and combinatorics calculations (permutation, combination, binomial, expected_value, bayes)."""
+    return probability_calculation_prompt.probability_calculation_prompt(calculation_type, n, r, probability, trials)
 
 if __name__ == "__main__":
     mcp.run()

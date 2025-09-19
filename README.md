@@ -16,6 +16,7 @@
 - **几何计算**: 圆形、三角形、矩形、球体的详细计算指导
 - **单位换算**: 温度、长度、重量、速度、体积的全方位换算指导
 - **贷款分期**: 月供、总利息、提前还款、还款方式对比分析
+- **概率计算**: 排列、组合、二项分布、期望值、贝叶斯定理计算
 - **资产清单**: 列出所有可用工具和提示
 
 ## 安装配置
@@ -210,6 +211,24 @@ uv run fastmcp install claude-code src/mcp_server/server.py --name calculator_mc
 - **提前还款 (early_payoff/prepayment)**: 分析额外本金还款的影响和节省
 - **还款方式对比 (comparison/equal_principal)**: 等额本息 vs 等额本金还款方式对比
 
+### `probability_calculation` - 概率计算
+生成概率论和组合数学的详细计算指导，包含排列组合、概率分布和统计推理。
+
+**使用方法**: `/probability_calculation`
+**参数**:
+- `calculation_type` (str): 计算类型（permutation、combination、binomial、expected_value、bayes）
+- `n` (int, 可选): 总数量或试验次数
+- `r` (int, 可选): 选择数量或成功次数
+- `probability` (float, 可选): 成功概率（用于二项分布）
+- `trials` (int, 可选): 试验次数（用于二项分布）
+
+**支持的计算类型**:
+- **排列 (permutation/arrangement)**: 计算P(n,r)，顺序重要的排列数
+- **组合 (combination/choose)**: 计算C(n,r)，顺序无关的组合数
+- **二项概率 (binomial/binomial_probability)**: 计算二项分布概率P(X=k)
+- **期望值 (expected_value/expectation)**: 计算概率分布的期望值E(X)
+- **贝叶斯 (bayes/conditional)**: 计算条件概率和贝叶斯推理
+
 ### `list_all_assets` - 资产清单
 列出所有可用的工具和提示功能。
 
@@ -318,6 +337,28 @@ uv run fastmcp install claude-code src/mcp_server/server.py --name calculator_mc
 /loan_amortization principal:180000.0 annual_rate:5.5 term_years:30
 ```
 生成详细的贷款分析，包含分步的MCP工具计算、财务洞察、验证步骤和实用建议。
+
+#### 概率计算
+```
+# 排列计算（10选3的排列数）
+/probability_calculation calculation_type:"permutation" n:10 r:3
+
+# 组合计算（彩票：49选6）
+/probability_calculation calculation_type:"combination" n:49 r:6
+
+# 二项分布（20次试验中15次成功，成功率80%）
+/probability_calculation calculation_type:"binomial" n:20 r:15 probability:0.8
+
+# 期望值计算（投资回报期望）
+/probability_calculation calculation_type:"expected_value"
+
+# 贝叶斯推理（医学诊断概率更新）
+/probability_calculation calculation_type:"bayes"
+
+# 通用概率指导（不指定具体参数）
+/probability_calculation calculation_type:"general_guide"
+```
+生成详细的概率和组合数学指导，包含公式推导、MCP工具计算步骤、实际应用场景和验证方法。
 
 #### 查看所有功能
 ```
