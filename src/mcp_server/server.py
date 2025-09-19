@@ -136,7 +136,12 @@ async def stddev(numbers: List[float]) -> float:
 # Register prompts with decorators
 @mcp.prompt()
 def build_multiplication_table(size: int = 10, start: int = 1) -> str:
-    """Generate a prompt for creating multiplication tables."""
+    """Generate a prompt for creating multiplication tables.
+    
+    Args:
+        size: Table dimensions (default: 10)
+        start: Starting number (default: 1)
+    """
     return multiplication_table_prompt.build_multiplication_table(size, start)
 
 @mcp.prompt()
@@ -146,32 +151,80 @@ def list_all_assets() -> str:
 
 @mcp.prompt()
 def solve_equation_conversation(equation: str) -> List:
-    """Start a conversation to solve an equation step by step."""
+    """Start a conversation to solve an equation step by step.
+    
+    Args:
+        equation: The mathematical equation to solve
+    """
     return solve_equation_prompt.solve_equation_conversation(equation)
 
 @mcp.prompt()
 def financial_calculation(principal: float, rate: float, time: int) -> str:
-    """Generate a prompt for compound interest calculation."""
+    """Generate a prompt for compound interest calculation.
+    
+    Args:
+        principal: Initial investment amount
+        rate: Annual interest rate (as decimal, e.g., 0.05 for 5%)
+        time: Investment period in years
+    """
     return financial_calculation_prompt.financial_calculation_prompt(principal, rate, time)
 
 @mcp.prompt()
 def geometry_calculation(shape: str, dimension1: float, dimension2: float = None, dimension3: float = None) -> str:
-    """Generate a prompt for geometric calculations (circle, triangle, rectangle, sphere)."""
+    """Generate a prompt for geometric calculations.
+    
+    Args:
+        shape: Shape type (circle, triangle, rectangle, sphere)
+        dimension1: First dimension (radius for circle/sphere, length for rectangle, base for triangle)
+        dimension2: Second dimension (width for rectangle, height for triangle, optional)
+        dimension3: Third dimension (third side for triangle, optional)
+    """
     return geometry_calculation_prompt.geometry_calculation_prompt(shape, dimension1, dimension2, dimension3)
 
 @mcp.prompt()
 def unit_conversion(conversion_type: str, value: float, from_unit: str = None, to_unit: str = None) -> str:
-    """Generate a prompt for unit conversions (temperature, length, weight, speed, volume)."""
+    """Generate a prompt for unit conversions with detailed conversion steps.
+    
+    Args:
+        conversion_type: Type (temperature, length, weight, speed, volume)
+        value: Value to convert
+        from_unit: Source unit (optional for general guidance)
+        to_unit: Target unit (optional for general guidance)
+    """
     return unit_conversion_prompt.unit_conversion_prompt(conversion_type, value, from_unit, to_unit)
 
 @mcp.prompt()
 def loan_amortization(principal: float, annual_rate: float, term_years: int, calculation_type: str = "monthly_payment") -> str:
-    """Generate a prompt for loan amortization calculations (payment, interest, prepayment, comparison)."""
+    """Generate a prompt for loan amortization analysis with detailed financial calculations.
+    
+    Args:
+        principal: Loan amount
+        annual_rate: Annual interest rate (as percentage, e.g., 5.5 for 5.5%)
+        term_years: Loan term in years
+        calculation_type: Analysis type - options:
+            - "monthly_payment": Calculate monthly payment amount
+            - "total_interest": Calculate total interest paid
+            - "early_payoff": Analyze early payoff scenarios
+            - "comparison": Compare different loan terms
+    """
     return loan_amortization_prompt.loan_amortization_prompt(principal, annual_rate, term_years, calculation_type)
 
 @mcp.prompt()
 def probability_calculation(calculation_type: str, n: int = None, r: int = None, probability: float = None, trials: int = None) -> str:
-    """Generate a prompt for probability and combinatorics calculations (permutation, combination, binomial, expected_value, bayes)."""
+    """Generate a prompt for probability and combinatorics calculations with mathematical guidance.
+    
+    Args:
+        calculation_type: Calculation type - options:
+            - "permutation": Calculate P(n,r) where order matters
+            - "combination": Calculate C(n,r) where order doesn't matter
+            - "binomial": Binomial probability distribution
+            - "expected_value": Calculate expected value E(X)
+            - "bayes": Bayes' theorem for conditional probability
+        n: Total number of items or trials (optional)
+        r: Number of items selected or successes (optional)
+        probability: Success probability for binomial (optional, 0-1)
+        trials: Number of trials (optional)
+    """
     return probability_calculation_prompt.probability_calculation_prompt(calculation_type, n, r, probability, trials)
 
 if __name__ == "__main__":
