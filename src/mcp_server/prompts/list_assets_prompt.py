@@ -3,6 +3,10 @@ def list_all_assets() -> str:
 
     return """# 🚀 Calculator MCP Server Assets
 
+Display a list of all the assets available in the Calculator MCP Server.
+
+Don't execute or run any of them.
+
 ## 🔧 Tools
 
 ### Basic Arithmetic Operations
@@ -42,7 +46,7 @@ def list_all_assets() -> str:
    - Supports n from 0 to 20
    - Example: `factorial(5)` → `120`
 
-### Statistical Operations
+### Statistical Operations - Basic
 9. **mean(numbers: List[float]) -> float**
    - Calculate the arithmetic mean of a dataset
    - Example: `mean([1, 2, 3, 4, 5])` → `3.0`
@@ -54,6 +58,61 @@ def list_all_assets() -> str:
 11. **stddev(numbers: List[float]) -> float**
     - Calculate the standard deviation of a dataset
     - Example: `stddev([2, 4, 4, 4, 5, 5, 7, 9])` → `2.0`
+
+12. **min_value(numbers: List[float]) -> float**
+    - Find the minimum value in a dataset
+    - Example: `min_value([5, 2, 8, 1, 9])` → `1`
+
+13. **max_value(numbers: List[float]) -> float**
+    - Find the maximum value in a dataset
+    - Example: `max_value([5, 2, 8, 1, 9])` → `9`
+
+14. **sum(numbers: List[float]) -> float**
+    - Calculate the sum of all values in a dataset
+    - Example: `sum([1, 2, 3, 4, 5])` → `15`
+
+15. **count(numbers: List[float]) -> int**
+    - Count the number of values in a dataset
+    - Example: `count([1, 2, 3, 4, 5])` → `5`
+
+16. **range_stat(numbers: List[float]) -> float**
+    - Calculate the range (max - min) of a dataset
+    - Example: `range_stat([1, 5, 3, 9, 2])` → `8`
+
+17. **variance(numbers: List[float]) -> float**
+    - Calculate the variance of a dataset
+    - Example: `variance([1, 2, 3, 4, 5])` → `2.5`
+
+18. **mode(numbers: List[float]) -> Union[float, List[float]]**
+    - Find the mode(s) of a dataset
+    - Returns single value or list for multiple modes
+    - Example: `mode([1, 2, 2, 3, 2])` → `2`
+
+### Statistical Operations - Advanced
+19. **percentile(numbers: List[float], p: float) -> float**
+    - Calculate the pth percentile of a dataset
+    - Parameter `p` must be between 0 and 100
+    - Example: `percentile([1, 2, 3, 4, 5], 50)` → `3.0`
+
+20. **quartiles(numbers: List[float]) -> dict**
+    - Calculate the quartiles (Q1, Q2, Q3) of a dataset
+    - Returns dictionary with Q1, Q2, Q3 values
+    - Example: `quartiles([1, 2, 3, 4, 5, 6, 7, 8])` → `{"Q1": 2.25, "Q2": 4.5, "Q3": 6.75}`
+
+21. **iqr(numbers: List[float]) -> float**
+    - Calculate the interquartile range (Q3 - Q1)
+    - Useful for identifying outliers
+    - Example: `iqr([1, 2, 3, 4, 5, 6, 7, 8])` → `4.5`
+
+22. **geometric_mean(numbers: List[float]) -> float**
+    - Calculate the geometric mean of positive values
+    - Useful for rates and ratios
+    - Example: `geometric_mean([2, 4, 8])` → `4.0`
+
+23. **harmonic_mean(numbers: List[float]) -> float**
+    - Calculate the harmonic mean of positive values
+    - Useful for averaging rates
+    - Example: `harmonic_mean([1, 2, 4])` → `1.71`
 
 ## 📝 Prompts
 
@@ -103,6 +162,7 @@ def list_all_assets() -> str:
 7. **loan_amortization(principal: float, annual_rate: float, term_years: int, calculation_type: str = "monthly_payment") -> str**
    - Generate a prompt for loan amortization analysis with detailed financial calculations
    - Parameters:
+
      - `principal`: Loan amount
      - `annual_rate`: Annual interest rate (percentage)
      - `term_years`: Loan term in years

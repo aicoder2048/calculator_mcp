@@ -50,7 +50,21 @@ class FactorialInput(BaseModel):
 
 
 class StatisticsInput(BaseModel):
-    data: List[float] = Field(..., min_length=1, description="Data points for statistical calculation")
+    data: Optional[List[float]] = Field(None, min_length=1, description="Data points for statistical calculation")
+    numbers: Optional[List[float]] = Field(None, min_length=1, description="Alternative field name for data points")
+    
+    def __init__(self, **data):
+        # Handle both 'data' and 'numbers' fields
+        if "numbers" in data and "data" not in data:
+            data["data"] = data["numbers"]
+        super().__init__(**data)
+    
+    @field_validator("data")
+    @classmethod
+    def validate_data(cls, v):
+        if v is None or len(v) == 0:
+            raise ValueError("At least one data point is required")
+        return v
 
 
 class CalculationRecord(BaseModel):

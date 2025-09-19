@@ -1,6 +1,6 @@
 from fastmcp import FastMCP, Context
 from contextlib import asynccontextmanager
-from typing import Dict, Any, AsyncIterator, List
+from typing import Dict, Any, AsyncIterator, List, Union
 import logging
 import sys
 import os
@@ -132,6 +132,78 @@ async def stddev(numbers: List[float]) -> float:
     """Calculate the standard deviation of a dataset."""
     statistics_input = StatisticsInput(numbers=numbers)
     return await statistics_tool.stddev(statistics_input)
+
+@mcp.tool()
+async def min_value(numbers: List[float]) -> float:
+    """Find the minimum value in a dataset."""
+    statistics_input = StatisticsInput(numbers=numbers)
+    return await statistics_tool.min_value(statistics_input)
+
+@mcp.tool()
+async def max_value(numbers: List[float]) -> float:
+    """Find the maximum value in a dataset."""
+    statistics_input = StatisticsInput(numbers=numbers)
+    return await statistics_tool.max_value(statistics_input)
+
+@mcp.tool()
+async def sum(numbers: List[float]) -> float:
+    """Calculate the sum of all values in a dataset."""
+    statistics_input = StatisticsInput(numbers=numbers)
+    return await statistics_tool.sum_values(statistics_input)
+
+@mcp.tool()
+async def count(numbers: List[float]) -> int:
+    """Count the number of values in a dataset."""
+    statistics_input = StatisticsInput(numbers=numbers)
+    return await statistics_tool.count_values(statistics_input)
+
+@mcp.tool()
+async def range_stat(numbers: List[float]) -> float:
+    """Calculate the range (max - min) of a dataset."""
+    statistics_input = StatisticsInput(numbers=numbers)
+    return await statistics_tool.range_values(statistics_input)
+
+@mcp.tool()
+async def variance(numbers: List[float]) -> float:
+    """Calculate the variance of a dataset."""
+    statistics_input = StatisticsInput(numbers=numbers)
+    return await statistics_tool.variance(statistics_input)
+
+@mcp.tool()
+async def mode(numbers: List[float]) -> Union[float, List[float]]:
+    """Find the mode(s) of a dataset."""
+    statistics_input = StatisticsInput(numbers=numbers)
+    return await statistics_tool.mode(statistics_input)
+
+@mcp.tool()
+async def percentile(numbers: List[float], p: float) -> float:
+    """Calculate the pth percentile of a dataset."""
+    statistics_input = StatisticsInput(numbers=numbers)
+    return await statistics_tool.percentile(statistics_input, p)
+
+@mcp.tool()
+async def quartiles(numbers: List[float]) -> dict:
+    """Calculate the quartiles (Q1, Q2, Q3) of a dataset."""
+    statistics_input = StatisticsInput(numbers=numbers)
+    return await statistics_tool.quartiles(statistics_input)
+
+@mcp.tool()
+async def iqr(numbers: List[float]) -> float:
+    """Calculate the interquartile range (Q3 - Q1) of a dataset."""
+    statistics_input = StatisticsInput(numbers=numbers)
+    return await statistics_tool.iqr(statistics_input)
+
+@mcp.tool()
+async def geometric_mean(numbers: List[float]) -> float:
+    """Calculate the geometric mean of positive values."""
+    statistics_input = StatisticsInput(numbers=numbers)
+    return await statistics_tool.geometric_mean(statistics_input)
+
+@mcp.tool()
+async def harmonic_mean(numbers: List[float]) -> float:
+    """Calculate the harmonic mean of positive values."""
+    statistics_input = StatisticsInput(numbers=numbers)
+    return await statistics_tool.harmonic_mean(statistics_input)
 
 # Register prompts with decorators
 @mcp.prompt()
