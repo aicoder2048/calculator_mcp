@@ -82,10 +82,52 @@ def list_all_assets() -> str:
      - `time`: Investment period in years
    - Use case: Financial planning and investment calculations
 
+5. **geometry_calculation(shape: str, dimension1: float, dimension2: float = None, dimension3: float = None) -> str**
+   - Generate a prompt for geometric calculations with detailed MCP tool guidance
+   - Parameters:
+     - `shape`: Shape type (circle, triangle, rectangle, sphere)
+     - `dimension1`: First dimension (radius, length, base)
+     - `dimension2`: Second dimension (width, height, optional)
+     - `dimension3`: Third dimension (triangle third side, optional)
+   - Use case: Calculate area, perimeter, volume with step-by-step instructions
+
+6. **unit_conversion(conversion_type: str, value: float, from_unit: str = None, to_unit: str = None) -> str**
+   - Generate a prompt for unit conversions with detailed conversion steps
+   - Parameters:
+     - `conversion_type`: Type (temperature, length, weight, speed, volume)
+     - `value`: Value to convert
+     - `from_unit`: Source unit (optional for general guidance)
+     - `to_unit`: Target unit (optional for general guidance)
+   - Use case: Convert between metric/imperial units with formula explanations
+
+7. **loan_amortization(principal: float, annual_rate: float, term_years: int, calculation_type: str = "monthly_payment") -> str**
+   - Generate a prompt for loan amortization analysis with detailed financial calculations
+   - Parameters:
+     - `principal`: Loan amount
+     - `annual_rate`: Annual interest rate (percentage)
+     - `term_years`: Loan term in years
+     - `calculation_type`: Analysis type (monthly_payment, total_interest, early_payoff, comparison)
+   - Use case: Loan analysis, payment planning, financial decision making
+
+8. **probability_calculation(calculation_type: str, n: int = None, r: int = None, probability: float = None, trials: int = None) -> str**
+   - Generate a prompt for probability and combinatorics calculations with mathematical guidance
+   - Parameters:
+     - `calculation_type`: Calculation type (permutation, combination, binomial, expected_value, bayes)
+     - `n`: Total number or trials (optional)
+     - `r`: Selection number or successes (optional)
+     - `probability`: Success probability for binomial (optional)
+     - `trials`: Number of trials (optional)
+   - Use case: Statistical analysis, probability theory, combinatorics problems
+
 ## 💡 Usage Tips
 - All arithmetic operations support floating-point numbers
 - Division returns both quotient and remainder for completeness
 - Statistical operations require at least one data point
 - Factorial supports values from 0 to 20 for safety
 - Financial calculations use compound interest formula
-- Equation solver provides step-by-step explanations"""
+- Equation solver provides step-by-step explanations
+- Geometry prompts include detailed MCP tool usage instructions
+- Unit conversion prompts provide formula explanations and validation steps
+- Loan amortization supports multiple analysis types for comprehensive financial planning
+- Probability calculations cover combinatorics, distributions, and Bayesian inference
+- All enhanced prompts include purpose/goals explanation and sub-goals breakdown"""
